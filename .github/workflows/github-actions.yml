@@ -13,7 +13,7 @@ jobs:
           distribution: 'adopt'
       - name: Test
         run: mvn test
-  check:
+  checkstyle:
     runs-on: ubuntu-latest
     steps:
       - name: Checkstyle
