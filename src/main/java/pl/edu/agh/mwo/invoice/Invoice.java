@@ -8,6 +8,8 @@ import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
     private int number;
+    private Map<Product, Integer> products = new HashMap<>();
+
 
     public Invoice(int number) {
         this.number = number;
@@ -21,7 +23,20 @@ public class Invoice {
         return number;
     }
 
-    private Map<Product, Integer> products = new HashMap<Product, Integer>();
+    public String printProducts() {
+        StringBuilder builder = new StringBuilder();
+
+        for (Product product : products.keySet()) {
+            String result = String.format("""
+                            Invoice number: %d
+                            Product name: %s
+                            Product amount: %s
+                            Product price: %s""",
+                    number, product.getName(), 1, product.getPrice());
+            builder.append(result).append("\n");
+        }
+        return builder.toString();
+    }
 
     public void addProduct(Product product) {
         addProduct(product, 1);

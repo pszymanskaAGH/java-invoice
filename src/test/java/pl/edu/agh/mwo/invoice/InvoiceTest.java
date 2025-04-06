@@ -7,7 +7,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import pl.edu.agh.mwo.invoice.Invoice;
 import pl.edu.agh.mwo.invoice.product.DairyProduct;
 import pl.edu.agh.mwo.invoice.product.OtherProduct;
 import pl.edu.agh.mwo.invoice.product.Product;
@@ -20,6 +19,22 @@ public class InvoiceTest {
     public void createEmptyInvoiceForTheTest() {
         invoice = new Invoice();
     }
+
+//    @Test
+//    public void testInvoicePrinting() {
+//        int number = 1;
+//        Invoice invoice = new Invoice(number);
+//        Product product = new OtherProduct("Book", BigDecimal.valueOf(5.55));
+//        invoice.addProduct(product);
+//
+//        String result = """
+//                            Invoice number: 1
+//                            Product name: Book
+//                            Product amount: 1
+//                            Product price: 5.55""";
+//
+//        Assert.assertEquals(result, invoice.printProducts());
+//    }
 
     @Test
     public void testInvoiceWithNumber() {
