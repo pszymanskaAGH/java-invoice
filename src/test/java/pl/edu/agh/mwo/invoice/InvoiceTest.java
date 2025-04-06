@@ -22,6 +22,14 @@ public class InvoiceTest {
     }
 
     @Test
+    public void testInvoiceWithNumber() {
+        int number = 1;
+        Invoice invoice = new Invoice(number);
+
+        Assert.assertEquals(number, invoice.getNumber());
+    }
+
+    @Test
     public void testEmptyInvoiceHasEmptySubtotal() {
         Assert.assertThat(BigDecimal.ZERO, Matchers.comparesEqualTo(invoice.getNetTotal()));
     }
