@@ -7,10 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import pl.edu.agh.mwo.invoice.product.DairyProduct;
-import pl.edu.agh.mwo.invoice.product.OtherProduct;
-import pl.edu.agh.mwo.invoice.product.Product;
-import pl.edu.agh.mwo.invoice.product.TaxFreeProduct;
+import pl.edu.agh.mwo.invoice.product.*;
 
 public class InvoiceTest {
     private Invoice invoice;
@@ -18,6 +15,22 @@ public class InvoiceTest {
     @Before
     public void createEmptyInvoiceForTheTest() {
         invoice = new Invoice();
+    }
+
+    @Test
+    public void testWinePrice() {
+//        public BottleOfWine(String name, BigDecimal price, BigDecimal tax)
+        BottleOfWine wine = new BottleOfWine("The best one", BigDecimal.valueOf(5.55), BigDecimal.valueOf(0.11));
+
+        //without tax
+        BigDecimal expectedPrice = BigDecimal.valueOf(11.11);
+        BigDecimal actualPrice = wine.getPrice();
+        Assert.assertEquals(expectedPrice, actualPrice);
+
+        //with tax
+        BigDecimal expectedPriceWithTax = BigDecimal.valueOf(12.3321);
+        BigDecimal actualPriceWithTax = wine.getPriceWithTax();
+        Assert.assertEquals(expectedPriceWithTax, actualPriceWithTax);
     }
 
     @Test
@@ -74,7 +87,7 @@ public class InvoiceTest {
                 Product name: Pen
                 Product amount: 1
                 Product price: 1.11
-
+                
                 Invoice number: 2
                 Product name: Book
                 Product amount: 1
