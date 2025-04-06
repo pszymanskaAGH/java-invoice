@@ -19,7 +19,6 @@ public class InvoiceTest {
 
     @Test
     public void testWinePrice() {
-//        public BottleOfWine(String name, BigDecimal price, BigDecimal tax)
         BottleOfWine wine = new BottleOfWine("The best one", BigDecimal.valueOf(5.55), BigDecimal.valueOf(0.11));
 
         //without tax
@@ -29,6 +28,21 @@ public class InvoiceTest {
 
         //with tax
         BigDecimal expectedPriceWithTax = BigDecimal.valueOf(12.3321);
+        BigDecimal actualPriceWithTax = wine.getPriceWithTax();
+        Assert.assertEquals(expectedPriceWithTax, actualPriceWithTax);
+    }
+
+    @Test
+    public void testFuelPrice() {
+        BottleOfWine wine = new BottleOfWine("You will drive forever", BigDecimal.valueOf(5.55), BigDecimal.valueOf(0.23));
+
+        //without tax
+        BigDecimal expectedPrice = BigDecimal.valueOf(11.11);
+        BigDecimal actualPrice = wine.getPrice();
+        Assert.assertEquals(expectedPrice, actualPrice);
+
+        //with tax
+        BigDecimal expectedPriceWithTax = BigDecimal.valueOf(13.6653);
         BigDecimal actualPriceWithTax = wine.getPriceWithTax();
         Assert.assertEquals(expectedPriceWithTax, actualPriceWithTax);
     }
