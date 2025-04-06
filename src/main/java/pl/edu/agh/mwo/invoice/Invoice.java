@@ -28,7 +28,8 @@ public class Invoice {
         int counter = 0;
 
         for (Product product : products.keySet()) {
-            long amountOfprod = products.keySet().stream().filter(el -> el.getName().equals(product.getName())).count();
+            long amountOfprod = products.keySet().stream()
+                    .filter(el -> el.getName().equals(product.getName())).count();
 
             counter++;
             if (productQuantity.containsKey(product.getName())) {
