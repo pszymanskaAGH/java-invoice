@@ -9,7 +9,7 @@ import pl.edu.agh.mwo.invoice.product.Product;
 public class Invoice {
     private int number;
     private Map<Product, Integer> products = new HashMap<>();
-
+    private Map<String, Integer> productQuantity = new HashMap<>();
 
     public Invoice(int number) {
         this.number = number;
@@ -25,16 +25,27 @@ public class Invoice {
 
     public String printProducts() {
         StringBuilder builder = new StringBuilder();
+        int counter = 0;
 
         for (Product product : products.keySet()) {
-            String result = String.format("""
-                            Invoice number: %d
-                            Product name: %s
-                            Product amount: %s
-                            Product price: %s""",
-                    number, product.getName(), 1, product.getPrice());
-            builder.append(result).append("\n");
+            long amountOfprod = products.keySet().stream().filter(el -> el.getName().equals(product.getName())).count();
+
+            counter++;
+            if (productQuantity.containsKey(product.getName())) {
+                productQuantity.replace(product.getName(), 0);
+            } else {
+                productQuantity.put(product.getName(), 1);
+                String result = String.format("""
+                                Invoice number: %d
+                                Product name: %s
+                                Product amount: %s
+                                Product price: %s
+                                """,
+                        counter, product.getName(), amountOfprod, product.getPrice());
+                builder.append(result).append("\n");
+            }
         }
+        builder.append("Amount of products in a invoice: ").append(counter);
         return builder.toString();
     }
 

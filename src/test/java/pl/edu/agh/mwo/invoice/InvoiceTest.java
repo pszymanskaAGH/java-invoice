@@ -20,21 +20,71 @@ public class InvoiceTest {
         invoice = new Invoice();
     }
 
-//    @Test
-//    public void testInvoicePrinting() {
-//        int number = 1;
-//        Invoice invoice = new Invoice(number);
-//        Product product = new OtherProduct("Book", BigDecimal.valueOf(5.55));
-//        invoice.addProduct(product);
-//
-//        String result = """
-//                            Invoice number: 1
-//                            Product name: Book
-//                            Product amount: 1
-//                            Product price: 5.55""";
-//
-//        Assert.assertEquals(result, invoice.printProducts());
-//    }
+    @Test
+    public void testInvoicePrintingForOneProductButDuplicate() {
+        int number = 1;
+        Invoice invoice = new Invoice(number);
+        Product book1 = new OtherProduct("Book", BigDecimal.valueOf(5.55));
+        Product book2 = new OtherProduct("Book", BigDecimal.valueOf(5.55));
+        invoice.addProduct(book1);
+        invoice.addProduct(book2);
+
+        String expected = """
+                Invoice number: 1
+                Product name: Book
+                Product amount: 2
+                Product price: 5.55
+                
+                Amount of products in a invoice: 2""";
+
+        String actual = invoice.printProducts();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testInvoicePrintingForOneProduct() {
+        int number = 1;
+        Invoice invoice = new Invoice(number);
+        Product product = new OtherProduct("Book", BigDecimal.valueOf(5.55));
+        invoice.addProduct(product);
+
+        String expected = """
+                Invoice number: 1
+                Product name: Book
+                Product amount: 1
+                Product price: 5.55
+                
+                Amount of products in a invoice: 1""";
+
+        String actual = invoice.printProducts();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testInvoicePrintingForMoreProducts() {
+        int number = 1;
+        Invoice invoice = new Invoice(number);
+        Product product = new OtherProduct("Book", BigDecimal.valueOf(5.55));
+        Product pen = new OtherProduct("Pen", BigDecimal.valueOf(1.11));
+        invoice.addProduct(pen);
+        invoice.addProduct(product);
+
+        String expected = """
+                Invoice number: 1
+                Product name: Pen
+                Product amount: 1
+                Product price: 1.11
+
+                Invoice number: 2
+                Product name: Book
+                Product amount: 1
+                Product price: 5.55
+                
+                Amount of products in a invoice: 2""";
+
+        String actual = invoice.printProducts();
+        Assert.assertEquals(expected, actual);
+    }
 
     @Test
     public void testInvoiceWithNumber() {
