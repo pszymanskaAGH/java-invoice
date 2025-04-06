@@ -13,8 +13,10 @@ jobs:
           distribution: 'adopt'
       - name: Test
         run: mvn test
-  checkstyle:
+  check:
+    name: Checkstyle
     runs-on: ubuntu-latest
     steps:
       - name: Checkstyle
-        run: mvn checkstyle:check -U
+        run: mvn checkstyle:check
+        path: '**/**/checkstyle-result.xml'
