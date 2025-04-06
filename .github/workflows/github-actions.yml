@@ -13,10 +13,15 @@ jobs:
           distribution: 'adopt'
       - name: Test
         run: mvn test
-  check:
-    name: Checkstyle
+  checkstyle:
+    name: Lint with Checkstyle
     runs-on: ubuntu-latest
     steps:
-      - name: Checkstyle
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+      - name: Lint
         run: mvn checkstyle:check
-        path: '**/**/checkstyle-result.xml'
