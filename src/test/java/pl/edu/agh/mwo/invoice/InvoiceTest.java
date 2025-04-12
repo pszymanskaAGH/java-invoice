@@ -125,16 +125,16 @@ public class InvoiceTest {
         invoice.addProduct(pen);
         invoice.addProduct(product);
 
-        String expected = """
+        String expected = """                               
                 Invoice number: 1
-                Product name: Pen
-                Product amount: 1
-                Product price: 1.11
-                                
-                Invoice number: 2
                 Product name: Book
                 Product amount: 1
                 Product price: 5.55
+                
+                Invoice number: 2
+                Product name: Pen
+                Product amount: 1
+                Product price: 1.11
                                 
                 Amount of products in a invoice: 2""";
 

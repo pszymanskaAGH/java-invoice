@@ -4,10 +4,9 @@ import java.math.BigDecimal;
 
 public abstract class Product {
     private final String name;
-
     private final BigDecimal price;
-
     private final BigDecimal taxPercent;
+    private static final BigDecimal excise = BigDecimal.valueOf(5.56);
 
     protected Product(String name, BigDecimal price, BigDecimal tax) {
         if (name == null
@@ -31,7 +30,7 @@ public abstract class Product {
             throw new IllegalArgumentException();
         }
         if (isMothderOfTheLawDay) {
-            price = price.subtract(BigDecimal.valueOf(5.56));
+            price = price.subtract(excise);
         }
         this.price = price;
         this.name = name;
