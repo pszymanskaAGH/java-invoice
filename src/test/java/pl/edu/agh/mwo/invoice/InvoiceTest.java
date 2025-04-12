@@ -1,13 +1,12 @@
 package pl.edu.agh.mwo.invoice;
 
-import java.math.BigDecimal;
-
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import pl.edu.agh.mwo.invoice.product.*;
+
+import java.math.BigDecimal;
 
 public class InvoiceTest {
     private Invoice invoice;
@@ -33,7 +32,37 @@ public class InvoiceTest {
     }
 
     @Test
-    public void testFuelPrice() {
+    public void testFuelCarnisterPrice() {
+        FuelCanister wine = new FuelCanister("You will drive forever", BigDecimal.valueOf(5.55), BigDecimal.valueOf(0.23), false);
+
+        //without tax
+        BigDecimal expectedPrice = BigDecimal.valueOf(11.11);
+        BigDecimal actualPrice = wine.getPrice();
+        Assert.assertEquals(expectedPrice, actualPrice);
+
+        //with tax
+        BigDecimal expectedPriceWithTax = BigDecimal.valueOf(13.6653);
+        BigDecimal actualPriceWithTax = wine.getPriceWithTax();
+        Assert.assertEquals(expectedPriceWithTax, actualPriceWithTax);
+    }
+
+    @Test
+    public void testFuelCarnisterPriceWhenMotherOfTheLawDay() {
+        FuelCanister wine = new FuelCanister("You will drive forever", BigDecimal.valueOf(5.55), BigDecimal.valueOf(0.23), true);
+
+        //without tax
+        BigDecimal expectedPrice = BigDecimal.valueOf(5.55);
+        BigDecimal actualPrice = wine.getPrice();
+        Assert.assertEquals(expectedPrice, actualPrice);
+
+        //with tax
+        BigDecimal expectedPriceWithTax = BigDecimal.valueOf(6.8265);
+        BigDecimal actualPriceWithTax = wine.getPriceWithTax();
+        Assert.assertEquals(expectedPriceWithTax, actualPriceWithTax);
+    }
+
+    @Test
+    public void testFuelPriceWhenMOtherOfLawDay() {
         BottleOfWine wine = new BottleOfWine("You will drive forever", BigDecimal.valueOf(5.55), BigDecimal.valueOf(0.23));
 
         //without tax
@@ -61,7 +90,7 @@ public class InvoiceTest {
                 Product name: Book
                 Product amount: 2
                 Product price: 5.55
-                
+                                
                 Amount of products in a invoice: 2""";
 
         String actual = invoice.printProducts();
@@ -80,7 +109,7 @@ public class InvoiceTest {
                 Product name: Book
                 Product amount: 1
                 Product price: 5.55
-                
+                                
                 Amount of products in a invoice: 1""";
 
         String actual = invoice.printProducts();
@@ -101,12 +130,12 @@ public class InvoiceTest {
                 Product name: Pen
                 Product amount: 1
                 Product price: 1.11
-                
+                                
                 Invoice number: 2
                 Product name: Book
                 Product amount: 1
                 Product price: 5.55
-                
+                                
                 Amount of products in a invoice: 2""";
 
         String actual = invoice.printProducts();

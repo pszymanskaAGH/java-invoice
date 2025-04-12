@@ -22,6 +22,22 @@ public abstract class Product {
         this.taxPercent = tax;
     }
 
+    protected Product(String name, BigDecimal price, BigDecimal tax, boolean isMothderOfTheLawDay) {
+        if (name == null
+                || name.isEmpty()
+                || price == null || tax == null
+                || tax.compareTo(new BigDecimal(0)) < 0
+                || price.compareTo(new BigDecimal(0)) < 0) {
+            throw new IllegalArgumentException();
+        }
+        if (isMothderOfTheLawDay) {
+            price = price.subtract(BigDecimal.valueOf(5.56));
+        }
+        this.price = price;
+        this.name = name;
+        this.taxPercent = tax;
+    }
+
     public String getName() {
         return name;
     }
